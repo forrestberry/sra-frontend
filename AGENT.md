@@ -100,6 +100,17 @@ frontend/
 
 ---
 
+## Branching and PR Workflow
+
+- New branch per feature: Use `feat/<slug>`, `fix/<slug>`, or `docs/<slug>` for each discrete change.
+- Atomic commits: Small, focused commits with descriptive messages.
+- Push branches: Push work-in-progress branches to `origin` frequently.
+- One PR per feature: Always open a new PR per feature/bugfix/docs update; keep PRs small and focused.
+- Protect `main`: Do not commit directly to `main`; merge via PR after review.
+- PR checklist: summary, scope, screenshots (UI), and any API changes or follow-ups.
+
+---
+
 ## UI Flows (Parent & Child)
 
 Parent Flow
