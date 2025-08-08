@@ -166,3 +166,4 @@ Roadmap (Docs-Only)
 - Add minimal components: children list, books grid, unit renderer
 - Centralize API wrapper to attach `child_id` and auth automatically
 - Accessibility pass: keyboard navigation and ARIA roles
+

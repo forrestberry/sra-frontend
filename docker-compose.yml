@@ -2,10 +2,15 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/Dockerfile
     ports:
       - "8080:80"
     env_file:
       - ./.env
-    volumes:
-      - .:/usr/share/nginx/html
+    # Remove volume mount for production, or use specific mounts for development
+    # volumes:
+    #   - ./html:/usr/share/nginx/html
+    #   - ./css:/usr/share/nginx/html/css
+    #   - ./js:/usr/share/nginx/html/js
+    #   - ./assets:/usr/share/nginx/html/assets
+    #   - ./env.js:/usr/share/nginx/html/env.js
