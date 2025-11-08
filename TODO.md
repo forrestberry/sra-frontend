@@ -20,15 +20,21 @@ Use this file to track high-level tasks. Each entry includes owner (if known), p
 
 ## In Progress
 
-| Status | Priority | Task             | Notes / Next Action                           |
-| ------ | -------- | ---------------- | --------------------------------------------- |
-| ⟳      | H        | Parent auth flow | Design Supabase Auth wiring + form validation |
+| Status | Priority | Task             | Notes / Next Action                                                                 |
+| ------ | -------- | ---------------- | ----------------------------------------------------------------------------------- |
+| ⟳      | H        | Parent auth flow | Next: wire Supabase Auth (signup/login), persist session, and gate routes via RLS. |
 
 ## Done
 
 | Status | Priority | Task                                                          | Notes / Next Action                                            |
 | ------ | -------- | ------------------------------------------------------------- | -------------------------------------------------------------- |
-| ☑     | H        | Scaffold Next.js app with pnpm, Tailwind, lint/test tooling   | Next.js 16 + Tailwind v4 + Prettier/Vitest configured          |
-| ☑     | H        | Implement Supabase client helpers + auth middleware           | Added browser/server clients, env guards, and route middleware |
-| ☑     | M        | Testing suite (Vitest unit + Playwright smoke)                | Vitest unit test + Playwright E2E setup with scripts/reporting |
-| ☑     | M        | Establish documentation baseline (README, architecture, plan) | Initial version committed on `frontend-docs-setup`             |
+| ☑      | H        | Scaffold Next.js app with pnpm, Tailwind, lint/test tooling   | Next.js 16 + Tailwind v4 + Prettier/Vitest configured          |
+| ☑      | H        | Implement Supabase client helpers + auth middleware           | Added browser/server clients, env guards, and route middleware |
+| ☑      | M        | Testing suite (Vitest unit + Playwright smoke)                | Vitest unit test + Playwright E2E setup with scripts/reporting |
+| ☑      | M        | Establish documentation baseline (README, architecture, plan) | Initial version committed on `frontend-docs-setup`             |
+
+## Next Session Focus
+
+1. Finish parent auth wiring (Supabase signup/login + session storage).
+2. Start read-only curriculum browser pulling `level/category/book` tables.
+3. Plan parent dashboard data hooks (identify queries + UI states).
