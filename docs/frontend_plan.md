@@ -14,6 +14,7 @@
 - Build signup/login screens wired to Supabase Auth (`role = parent`).
 - Add role-aware middleware + layout shell with responsive nav, session indicator, and sign-out.
 - Smoke-test with Supabase local project to confirm parent flow.
+- **Status**: Signup/login now call Supabase Auth with role metadata and sync sessions through `/api/auth/update-session`; middleware redirects work once env keys are configured.
 
 ## Phase 2 – Shared Curriculum Browser
 

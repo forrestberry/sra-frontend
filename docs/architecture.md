@@ -20,7 +20,7 @@ src/
 │   ├── feedback/      Checkpoint review widgets
 │   └── assessments/   Question player, answer forms
 ├── lib/
-│   ├── supabase/      Browser + server client helpers
+│   ├── supabase/      Browser + server client helpers + provider
 │   ├── env.ts         Runtime env guards
 │   └── utils/         Cross-cutting helpers (e.g., app-info)
 └── types/
@@ -52,6 +52,7 @@ src/
 
 - Tailwind CSS for utility-first styling.
 - Headless UI and Radix primitives for accessible components (dialogs, menus, combobox).
+- `SupabaseProvider` hydrates the browser client, listens for `onAuthStateChange`, and pings `/api/auth/update-session` so server components/middleware retain the latest session.
 - `components/ui/` exports typed wrappers so designers can swap internals without rewriting consumers.
 
 ## Testing Strategy

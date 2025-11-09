@@ -20,6 +20,9 @@ Lightweight Supabase-backed web client that lets parents manage students working
    ```bash
    cp .env.example .env.local
    ```
+
+   - `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` come from your Supabase project.
+   - `SUPABASE_SERVICE_ROLE_KEY` should stay server-side only; never expose it to the browser.
 3. Run checks:
    ```bash
    pnpm lint
@@ -37,6 +40,12 @@ Lightweight Supabase-backed web client that lets parents manage students working
 - **Unit/Integration**: `pnpm test` (Vitest) + `pnpm test:watch` for dev mode.
 - **E2E Smoke**: `pnpm test:e2e` launches Playwright against a temporary dev server on port 3100. Add `--headed` or run `pnpm test:e2e:ui` to interact with the UI runner.
 - **Formatting/Linting**: `pnpm format`, `pnpm lint`, `pnpm typecheck`.
+
+## Authentication
+
+- Signup/Login forms call Supabase Auth (`role = parent`) via the shared browser client and sync sessions through `/api/auth/update-session` so middleware can route users based on metadata.
+- Middleware (`middleware.ts`) enforces role access while server components use `getSupabaseServerClient` for data fetching behind RLS.
+- When testing locally, ensure your Supabase project allows email/password signup for parents or run a Supabase CLI instance with matching credentials.
 
 ## Repository Layout
 

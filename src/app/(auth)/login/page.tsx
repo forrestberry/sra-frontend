@@ -1,11 +1,35 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+import { useSupabaseClient } from '@/lib/supabase/provider';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
+  const [message, setMessage] = useState<string | null>(null);
+  const supabase = useSupabaseClient();
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus('submitting');
+    setMessage(null);
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setStatus('error');
+      setMessage(error.message);
+      return;
+    }
+
+    setStatus('idle');
+    router.replace('/parent');
+  };
 
   return (
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-16 sm:px-6">
@@ -18,7 +42,10 @@ export default function LoginPage() {
         </p>
       </div>
 
-      <form className="space-y-4 rounded-xl border border-slate-200 bg-white p-5">
+      <form
+        className="space-y-4 rounded-xl border border-slate-200 bg-white p-5"
+        onSubmit={handleSubmit}
+      >
         <label className="block text-left text-sm font-medium text-slate-700">
           Email
           <input
@@ -45,11 +72,12 @@ export default function LoginPage() {
 
         <button
           className="w-full rounded-md border border-slate-400 px-4 py-2 text-sm font-medium text-slate-900 disabled:border-slate-200 disabled:text-slate-400"
-          disabled={!email || !password}
-          type="button"
+          disabled={!email || !password || status === 'submitting'}
+          type="submit"
         >
-          Continue (coming soon)
+          {status === 'submitting' ? 'Signing in…' : 'Continue'}
         </button>
+        {message ? <p className="text-sm text-rose-600">{message}</p> : null}
       </form>
 
       <p className="text-center text-sm text-slate-600">

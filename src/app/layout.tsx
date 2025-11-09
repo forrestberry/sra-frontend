@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
+import { SupabaseProvider } from '@/lib/supabase/provider';
 import { APP_DESCRIPTION, APP_NAME } from '@/lib/utils/app-info';
 
 const geistSans = Geist({
@@ -27,12 +28,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} text-base`}>
-        <div className="flex min-h-screen flex-col">
-          <main className="flex-1">{children}</main>
-          <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
-            Built with Next.js + Supabase • {new Date().getFullYear()}
-          </footer>
-        </div>
+        <SupabaseProvider>
+          <div className="flex min-h-screen flex-col">
+            <main className="flex-1">{children}</main>
+            <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500">
+              Built with Next.js + Supabase • {new Date().getFullYear()}
+            </footer>
+          </div>
+        </SupabaseProvider>
       </body>
     </html>
   );

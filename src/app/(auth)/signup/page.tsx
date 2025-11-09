@@ -3,12 +3,19 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { useSupabaseClient } from '@/lib/supabase/provider';
+
 export default function SignupPage() {
   const [formState, setFormState] = useState({
     email: '',
     password: '',
     householdName: '',
   });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>(
+    'idle',
+  );
+  const [message, setMessage] = useState<string | null>(null);
+  const supabase = useSupabaseClient();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -16,6 +23,41 @@ export default function SignupPage() {
   };
 
   const canSubmit = Object.values(formState).every(Boolean);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus('submitting');
+    setMessage(null);
+
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.signUp({
+      email: formState.email,
+      password: formState.password,
+      options: {
+        emailRedirectTo:
+          typeof window !== 'undefined' ? `${window.location.origin}/login` : undefined,
+        data: {
+          role: 'parent',
+          household_name: formState.householdName,
+        },
+      },
+    });
+
+    if (error) {
+      setStatus('error');
+      setMessage(error.message);
+      return;
+    }
+
+    setStatus('success');
+    setMessage(
+      user?.email
+        ? `We sent a confirmation link to ${user.email}. Finish signup there, then come back to log in.`
+        : 'Check your email for a confirmation link, then come back to sign in.',
+    );
+  };
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col gap-6 px-4 py-16 sm:px-6">
@@ -29,7 +71,10 @@ export default function SignupPage() {
         </p>
       </div>
 
-      <form className="grid gap-4 rounded-xl border border-slate-200 bg-white p-5 md:grid-cols-2">
+      <form
+        className="grid gap-4 rounded-xl border border-slate-200 bg-white p-5 md:grid-cols-2"
+        onSubmit={handleSubmit}
+      >
         <label className="text-sm font-medium text-slate-700">
           Household name
           <input
@@ -68,15 +113,22 @@ export default function SignupPage() {
         <div className="flex flex-col justify-end gap-3">
           <button
             className="rounded-md border border-slate-400 px-4 py-2 text-sm font-medium text-slate-900 disabled:border-slate-200 disabled:text-slate-400"
-            disabled={!canSubmit}
-            type="button"
+            disabled={!canSubmit || status === 'submitting'}
+            type="submit"
           >
-            Create account (coming soon)
+            {status === 'submitting' ? 'Creating…' : 'Create account'}
           </button>
           <p className="text-xs text-slate-500">
             Once Supabase confirms the account we&apos;ll guide you through adding
             students.
           </p>
+          {message ? (
+            <p
+              className={`text-sm ${status === 'error' ? 'text-rose-600' : 'text-slate-600'}`}
+            >
+              {message}
+            </p>
+          ) : null}
         </div>
       </form>
 

@@ -20,8 +20,6 @@ test.describe('Auth placeholder pages', () => {
     await page.getByLabel('Email').fill('parent@example.com');
     await page.getByLabel('Password').fill('strongpassword');
 
-    await expect(
-      page.getByRole('button', { name: /create account \(coming soon\)/i }),
-    ).toBeEnabled();
+    await expect(page.getByRole('button', { name: /create account/i })).toBeEnabled();
   });
 });
