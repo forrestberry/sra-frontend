@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function StudentWorkspacePlaceholder() {
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-8 px-4 py-16 sm:px-6">
@@ -24,12 +26,12 @@ export default function StudentWorkspacePlaceholder() {
 
       <section className="rounded-xl border border-slate-200 bg-white p-5 text-center text-sm text-slate-700">
         <p>Ready to practice?</p>
-        <a
+        <Link
           className="mt-3 inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-900"
           href="/student/books"
         >
           Browse books &amp; units
-        </a>
+        </Link>
       </section>
     </div>
   );

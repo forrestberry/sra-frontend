@@ -30,6 +30,7 @@
 - Screens to invite/add additional parents (leveraging backend signup semantics).
 - Student detail page: reset password workflow (via Supabase Admin API), mark completed books, view recent answers.
 - Notifications/toasts for key actions (student invite, level change).
+- **Status**: Parents can now create and list students via `/parent` (service-role route + form). Progress summaries and book assignments still TODO.
 
 ## Phase 4 – Student Experience
 

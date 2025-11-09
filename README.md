@@ -46,6 +46,7 @@ Lightweight Supabase-backed web client that lets parents manage students working
 ## Key Pages
 
 - `/curriculum` – Read-only browser for levels, categories, and books.
+- `/parent` – Parent dashboard to create student accounts (uses service-role-backed API) and view linked students.
 - `/student/books` – Student-facing list of books + units, leading to the unit runner experience.
 - `/student/books/[bookId]/unit/[unitNumber]` – Minimal unit runner where students enter answers (no instant feedback; checkpoint logic triggers every five units).
 

@@ -12,9 +12,9 @@ Use this file to track high-level tasks. Each entry includes owner (if known), p
 | Status | Priority | Task                                                    | Notes / Next Action                                              |
 | ------ | -------- | ------------------------------------------------------- | ---------------------------------------------------------------- |
 | ☑      | H        | Build parent auth flow (signup/login/reset)             | Supabase Auth wired with role metadata + session sync            |
-| ☐      | H        | Parent dashboard with linked students + progress        | Requires `parent_student_link` + `student_book_progress` queries |
+| ⟳      | H        | Parent dashboard with linked students + progress        | Need book assignment + progress cards (student_book_progress)    |
 | ⟳      | H        | Student workspace + unit runner                         | Extend checkpoint logic + richer progress feedback               |
-| ☐      | M        | Route handler for parent-triggered student provisioning | Wrap Supabase Admin API, ensure service key stays server-only    |
+| ☑      | M        | Route handler for parent-triggered student provisioning | `/api/parent/students` uses service role to create/link students |
 | ☐      | L        | Analytics/telemetry hook                                | Placeholder for future instrumentation                           |
 
 ## In Progress
@@ -32,6 +32,7 @@ Use this file to track high-level tasks. Each entry includes owner (if known), p
 | ☑      | M        | Testing suite (Vitest unit + Playwright smoke)                | Vitest unit test + Playwright E2E setup with scripts/reporting |
 | ☑      | H        | Build parent auth flow (signup/login/reset)                   | Supabase Auth wired with role metadata + session sync          |
 | ☑      | M        | Curriculum browser                                            | `/curriculum` page backed by Supabase tables                   |
+| ☑      | M        | Parent student provisioning route                             | `/api/parent/students` + dashboard form                        |
 | ☑      | M        | Establish documentation baseline (README, architecture, plan) | Initial version committed on `frontend-docs-setup`             |
 
 ## Next Session Focus

@@ -56,6 +56,7 @@ src/
 - `SupabaseProvider` hydrates the browser client, listens for `onAuthStateChange`, and pings `/api/auth/update-session` so server components/middleware retain the latest session. The same provider gives client components (e.g., future student dashboards) a typed Supabase instance.
 - `components/ui/` exports typed wrappers so designers can swap internals without rewriting consumers.
 - `/api/student/answers` lets authenticated students submit answers without exposing `answer_key` data to the client. It normalizes responses, computes correctness, and stores attempt counts.
+- `/api/parent/students` is a service-role-backed route that allows parents (via the web UI) to create student auth accounts, update their level, and link them to the household without exposing the service key to the browser.
 
 ## Testing Strategy
 

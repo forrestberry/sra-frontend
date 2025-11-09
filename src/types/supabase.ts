@@ -101,6 +101,32 @@ export type Database = {
         };
         Update: Partial<Database['public']['Tables']['answer']['Row']>;
       };
+      student: {
+        Row: {
+          id: string;
+          username: string;
+          current_level_id: string | null;
+        };
+        Insert: {
+          id: string;
+          username: string;
+          current_level_id?: string | null;
+        };
+        Update: Partial<Database['public']['Tables']['student']['Row']>;
+      };
+      parent_student_link: {
+        Row: {
+          parent_id: string;
+          student_id: string;
+          created_at: string | null;
+        };
+        Insert: {
+          parent_id: string;
+          student_id: string;
+          created_at?: string | null;
+        };
+        Update: Partial<Database['public']['Tables']['parent_student_link']['Row']>;
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
