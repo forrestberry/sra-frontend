@@ -17,12 +17,14 @@ Lightweight Supabase-backed web client that lets parents manage students working
    pnpm install
    ```
 2. Copy env template and fill in Supabase project keys (never commit secrets):
+
    ```bash
    cp .env.example .env.local
    ```
 
    - `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` come from your Supabase project.
    - `SUPABASE_SERVICE_ROLE_KEY` should stay server-side only; never expose it to the browser.
+
 3. Run checks:
    ```bash
    pnpm lint
@@ -38,7 +40,7 @@ Lightweight Supabase-backed web client that lets parents manage students working
 ## Testing
 
 - **Unit/Integration**: `pnpm test` (Vitest) + `pnpm test:watch` for dev mode.
-- **E2E Smoke**: `pnpm test:e2e` launches Playwright against a temporary dev server on port 3100. Add `--headed` or run `pnpm test:e2e:ui` to interact with the UI runner.
+- **E2E Smoke**: `pnpm test:e2e` launches Playwright against a temporary dev server on port 3100. Add `--headed` or run `pnpm test:e2e:ui` to interact with the UI runner. Auth flow specs require a running Supabase instance plus `SUPABASE_SERVICE_ROLE_KEY` (loaded via `.env.local`) so the test can confirm/delete users via the Admin API.
 - **Formatting/Linting**: `pnpm format`, `pnpm lint`, `pnpm typecheck`.
 
 ## Authentication
