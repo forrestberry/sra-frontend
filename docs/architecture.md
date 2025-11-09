@@ -13,8 +13,9 @@ src/
 ├── app/
 │   ├── (public)/      Landing, marketing, shared curriculum
 │   ├── (auth)/        Signup/login/reset flows
+│   ├── curriculum/    Read-only curriculum browser
 │   ├── parent/        Parent dashboard + student management
-│   └── student/       Student workspace + assessment flow
+│   └── student/       Student workspace + assessment flow (books, units, runner)
 ├── components/
 │   ├── ui/            Buttons, cards, table, progress
 │   ├── feedback/      Checkpoint review widgets
@@ -52,8 +53,9 @@ src/
 
 - Tailwind CSS for utility-first styling.
 - Headless UI and Radix primitives for accessible components (dialogs, menus, combobox).
-- `SupabaseProvider` hydrates the browser client, listens for `onAuthStateChange`, and pings `/api/auth/update-session` so server components/middleware retain the latest session.
+- `SupabaseProvider` hydrates the browser client, listens for `onAuthStateChange`, and pings `/api/auth/update-session` so server components/middleware retain the latest session. The same provider gives client components (e.g., future student dashboards) a typed Supabase instance.
 - `components/ui/` exports typed wrappers so designers can swap internals without rewriting consumers.
+- `/api/student/answers` lets authenticated students submit answers without exposing `answer_key` data to the client. It normalizes responses, computes correctness, and stores attempt counts.
 
 ## Testing Strategy
 

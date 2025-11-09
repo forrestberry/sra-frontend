@@ -19,7 +19,7 @@ export default function LandingPage() {
           {MARKETING_CONTENT.hero.headline}
         </h1>
         <p className="text-base leading-relaxed text-slate-600">{APP_DESCRIPTION}</p>
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <Link
             className="inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-900 hover:bg-white"
             href="/signup"
@@ -31,6 +31,12 @@ export default function LandingPage() {
             href={ROLE_PATHS.student}
           >
             Student workspace preview
+          </Link>
+          <Link
+            className="inline-flex items-center justify-center rounded-full border border-slate-300 px-5 py-2 text-sm font-medium text-slate-900 hover:bg-white"
+            href="/curriculum"
+          >
+            Browse curriculum
           </Link>
         </div>
       </header>

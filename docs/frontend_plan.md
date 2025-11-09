@@ -22,6 +22,7 @@
 - Add filtering/search for level/category.
 - Cache via server components with revalidation.
 - Expose the curriculum browser to both parent and student layouts for quick reference.
+- **Status**: `/curriculum` ships as a read-only browser backed by Supabase; filtering/search TBD.
 
 ## Phase 3 – Parent Experience
 
@@ -36,6 +37,7 @@
 - Book detail with available units; start/resume ability.
 - Unit runner with question carousel, answer form, submission status.
 - Checkpoint review UI surfacing last five units incorrect answers and re-try flow.
+- **Status**: `/student/books/...` now provides book + unit selection, plus a minimal unit runner that records answers (no live feedback yet). Checkpoint review still pending.
 
 ## Phase 5 – Polish & QA
 

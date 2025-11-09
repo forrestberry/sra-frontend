@@ -43,11 +43,21 @@ Lightweight Supabase-backed web client that lets parents manage students working
 - **E2E Smoke**: `pnpm test:e2e` launches Playwright against a temporary dev server on port 3100. Add `--headed` or run `pnpm test:e2e:ui` to interact with the UI runner. Auth flow specs require a running Supabase instance plus `SUPABASE_SERVICE_ROLE_KEY` (loaded via `.env.local`) so the test can confirm/delete users via the Admin API.
 - **Formatting/Linting**: `pnpm format`, `pnpm lint`, `pnpm typecheck`.
 
+## Key Pages
+
+- `/curriculum` – Read-only browser for levels, categories, and books.
+- `/student/books` – Student-facing list of books + units, leading to the unit runner experience.
+- `/student/books/[bookId]/unit/[unitNumber]` – Minimal unit runner where students enter answers (no instant feedback; checkpoint logic triggers every five units).
+
 ## Authentication
 
 - Signup/Login forms call Supabase Auth (`role = parent`) via the shared browser client and sync sessions through `/api/auth/update-session` so middleware can route users based on metadata.
 - Middleware (`middleware.ts`) enforces role access while server components use `getSupabaseServerClient` for data fetching behind RLS.
 - When testing locally, ensure your Supabase project allows email/password signup for parents or run a Supabase CLI instance with matching credentials.
+
+### Local Email Confirmations
+
+When running Supabase locally, open Inbucket (`http://127.0.0.1:54324`) to grab the confirmation link for any signup emails. Alternatively, flip the `email_confirm` flag inside Supabase Studio (Auth → Users).
 
 ## Repository Layout
 
